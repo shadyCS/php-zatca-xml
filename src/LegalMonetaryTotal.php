@@ -1,4 +1,5 @@
 <?php
+
 namespace Saleh7\Zatca;
 
 use Sabre\Xml\Writer;
@@ -12,6 +13,7 @@ class LegalMonetaryTotal implements XmlSerializable
     private $allowanceTotalAmount = 0;
     private $payableAmount;
     private $prepaidAmount;
+    private $chargeTotalAmount = 0;
 
     /**
      * @param float $lineExtensionAmount
@@ -71,6 +73,21 @@ class LegalMonetaryTotal implements XmlSerializable
     {
         $this->prepaidAmount = $prepaidAmount;
         return $this;
+    }
+
+    /**
+     * @param float $chargeTotalAmount
+     * @return LegalMonetaryTotal
+     */
+    public function setChargeTotalAmount(?float $chargeTotalAmount): LegalMonetaryTotal
+    {
+        $this->chargeTotalAmount = $chargeTotalAmount;
+        return $this;
+    }
+
+    public function getChargeTotalAmount(): float
+    {
+        return $this->chargeTotalAmount;
     }
 
     /**

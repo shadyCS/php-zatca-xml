@@ -1,4 +1,5 @@
 <?php
+
 namespace Saleh7\Zatca;
 
 use Sabre\Xml\Writer;
@@ -9,14 +10,23 @@ class Price implements XmlSerializable
     private $priceAmount;
     private $baseQuantity;
     private $unitCode = UnitCode::UNIT;
+    private $allowanceCharge;
 
     /**
      * @param float $priceAmount
      * @return Price
      */
+
+
     public function setPriceAmount(?float $priceAmount): Price
     {
         $this->priceAmount = $priceAmount;
+        return $this;
+    }
+
+    public function setAllowanceCharge(?AllowanceCharge $allowanceCharge): Price
+    {
+        $this->allowanceCharge = $allowanceCharge;
         return $this;
     }
 
@@ -68,6 +78,11 @@ class Price implements XmlSerializable
                     ]
                 ]
             );
+        }
+        if ($this->allowanceCharge !== null) {
+            $writer->write([
+                Schema::CAC . 'AllowanceCharge' => $this->allowanceCharge,
+            ]);
         }
     }
 }
